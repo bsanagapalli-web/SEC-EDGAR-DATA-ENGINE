@@ -1,4 +1,22 @@
 allow_embedding: false
+db_schema:
+  usage_events:
+    client: none
+    columns:
+    - admin_ui: {}
+      name: occurred_at
+      type: datetime
+    - admin_ui: {}
+      name: ticker
+      type: string
+    - admin_ui: {}
+      name: visitor_ip
+      type: string
+    - admin_ui: {}
+      name: client_type
+      type: string
+    server: full
+    title: Usage Events
 name: SEC EDGAR Fundamental Data Engine
 package_name: Minimal_Theme_2
 runtime_options:

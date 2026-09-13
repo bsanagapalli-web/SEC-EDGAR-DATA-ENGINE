@@ -7,6 +7,7 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     super().__init__(**properties)
     self._all_history = []
+    self.admin_results.visible = False
     self._configure_plots()
     self._analyze()
 
@@ -52,6 +53,8 @@ class Form1(Form1Template):
     self.company_name.text = result["company_name"]
     self.company_ticker.text = result["ticker"]
     self.overview_as_of.text = "FY {}".format(result["latest_year"])
+    self.visitor_count.text = str(result["visitor_count"])
+    self.current_user_count.text = str(result["current_user_count"])
     self.status_label.text = "Analysis refreshed • SEC EDGAR"
 
     self.revenue_value.text = metrics["revenue"]
@@ -74,6 +77,13 @@ class Form1(Form1Template):
     self.profitability_plot.figure = charts["profitability"]
     self.free_cash_flow_plot.figure = charts["free_cash_flow"]
     self.leverage_plot.figure = charts["leverage"]
+
+  @handle("usage_timer", "tick")
+  def usage_timer_tick(self, **event_args):
+    counts = anvil.server.call("get_public_user_counts")
+    if counts.get("ok"):
+      self.visitor_count.text = str(counts["all_time_users"])
+      self.current_user_count.text = str(counts["current_users"])
 
   @handle("history_search", "change")
   def history_search_change(self, **event_args):
@@ -101,3 +111,26 @@ class Form1(Form1Template):
     ticker = (self.ticker_input.text or "company").strip().lower()
     media = BlobMedia("text/csv", "\n".join(lines).encode("utf-8"), name="%s_fundamentals.csv" % ticker)
     download(media)
+
+  @handle("admin_button", "click")
+  def admin_button_click(self, **event_args):
+    admin_key = (self.admin_key_input.text or "").strip()
+    if not admin_key:
+      self.admin_status.text = "Enter the admin key"
+      self.admin_key_input.focus()
+      return
+
+    self.admin_button.enabled = False
+    self.admin_status.text = "Loading activity..."
+    try:
+      result = anvil.server.call("get_admin_usage", admin_key)
+      if not result.get("ok"):
+        self.admin_status.text = result["message"]
+        self.admin_results.visible = False
+        return
+      events = result["events"]
+      self.admin_panel.items = events
+      self.admin_results.visible = True
+      self.admin_status.text = "%d activity event%s" % (len(events), "" if len(events) == 1 else "s")
+    finally:
+      self.admin_button.enabled = True

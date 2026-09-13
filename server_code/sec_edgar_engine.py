@@ -10,6 +10,7 @@ import time
 from datetime import datetime, timezone
 
 import anvil.server
+from anvil.tables import app_tables
 import requests
 
 
@@ -24,6 +25,8 @@ SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
 SEC_REQUEST_DELAY = 0.12
 TICKER_CACHE_TTL = 24 * 60 * 60
 FACTS_CACHE_TTL = 6 * 60 * 60
+CURRENT_USER_WINDOW_SECONDS = 15 * 60
+ADMIN_KEY = "Bhavesh#13"
 _lock = threading.RLock()
 _last_request_at = 0.0
 _ticker_cache = (0.0, None)
@@ -275,6 +278,45 @@ def _build_result(ticker, cik, facts, submissions):
   }
 
 
+def _record_usage(ticker):
+  """Persist one successful analysis request for the protected admin view."""
+  client = anvil.server.context.client
+  app_tables.usage_events.add_row(
+    occurred_at=datetime.now(timezone.utc),
+    ticker=ticker,
+    visitor_ip=client.ip or "unknown",
+    client_type=client.type or "unknown",
+  )
+  return _visitor_counts()
+
+
+def _visitor_counts():
+  """Return all-time and recently active distinct anonymous visitor counts."""
+  now = datetime.now(timezone.utc)
+  all_time_ips = set()
+  current_ips = set()
+  for row in app_tables.usage_events.search():
+    visitor_ip = row["visitor_ip"] or "unknown"
+    all_time_ips.add(visitor_ip)
+    occurred_at = row["occurred_at"]
+    if occurred_at is not None:
+      if occurred_at.tzinfo is None:
+        occurred_at = occurred_at.replace(tzinfo=timezone.utc)
+      if (now - occurred_at).total_seconds() <= CURRENT_USER_WINDOW_SECONDS:
+        current_ips.add(visitor_ip)
+  return len(all_time_ips), len(current_ips)
+
+
+def _usage_row(row):
+  occurred_at = row["occurred_at"]
+  return {
+    "timestamp": occurred_at.strftime("%Y-%m-%d %H:%M UTC") if occurred_at else "unknown",
+    "ticker": row["ticker"] or "—",
+    "visitor_ip": row["visitor_ip"] or "unknown",
+    "client_type": row["client_type"] or "unknown",
+  }
+
+
 @anvil.server.callable
 def analyze_ticker(ticker, force_refresh=False):
   ticker = (ticker or "").strip().upper()
@@ -289,4 +331,24 @@ def analyze_ticker(ticker, force_refresh=False):
   result = _build_result(ticker, cik, facts, fetch_submissions(cik, force_refresh=force_refresh))
   if result is None:
     return {"ok": False, "message": "No usable annual revenue data was found for {}.".format(ticker)}
+  all_time_users, current_users = _record_usage(ticker)
+  result["visitor_count"] = all_time_users
+  result["current_user_count"] = current_users
   return result
+
+
+@anvil.server.callable
+def get_public_user_counts():
+  """Return public aggregate counts without exposing usage details."""
+  all_time_users, current_users = _visitor_counts()
+  return {"ok": True, "all_time_users": all_time_users, "current_users": current_users}
+
+
+@anvil.server.callable
+def get_admin_usage(admin_key):
+  """Return usage events only when the server-side admin key matches."""
+  if admin_key != ADMIN_KEY:
+    return {"ok": False, "message": "Invalid admin key."}
+  rows = list(app_tables.usage_events.search())
+  rows.sort(key=lambda row: row["occurred_at"] or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+  return {"ok": True, "events": [_usage_row(row) for row in rows]}

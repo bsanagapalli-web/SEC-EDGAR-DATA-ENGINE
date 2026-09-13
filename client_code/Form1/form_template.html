@@ -22,7 +22,7 @@
 
     <section class="company-strip" aria-label="Company overview">
       <div><p class="section-kicker">Company overview</p><h2><anvil-component type="Label" name="company_name" prop:text="Loading company..." prop:role="inline-heading"></anvil-component> <span class="ticker-badge"><anvil-component type="Label" name="company_ticker" prop:text="AAPL" prop:role="inline-badge"></anvil-component></span></h2></div>
-      <div class="overview-meta"><span class="data-freshness"><span class="freshness-dot" aria-hidden="true"></span><anvil-component type="Label" name="status_label" prop:text="Ready to analyze" prop:role="inline-status"></anvil-component></span><span class="as-of-label">As of <anvil-component type="Label" name="overview_as_of" prop:text="—" prop:role="inline-status"></anvil-component></span></div>
+      <div class="overview-meta"><span class="public-counter"><span class="counter-dot" aria-hidden="true"></span><anvil-component type="Label" name="visitor_count" prop:text="0" prop:role="public-count"></anvil-component> all-time users</span><span class="public-counter current-counter"><span class="counter-dot" aria-hidden="true"></span><anvil-component type="Label" name="current_user_count" prop:text="0" prop:role="public-count"></anvil-component> current users</span><span class="data-freshness"><span class="freshness-dot" aria-hidden="true"></span><anvil-component type="Label" name="status_label" prop:text="Ready to analyze" prop:role="inline-status"></anvil-component></span><span class="as-of-label">As of <anvil-component type="Label" name="overview_as_of" prop:text="—" prop:role="inline-status"></anvil-component></span></div>
     </section>
 
     <section class="metric-grid" aria-label="Key performance indicators">
@@ -50,5 +50,16 @@
       <p class="table-footnote">Values normalized from annual SEC EDGAR filings. Ratios shown on a trailing fiscal-year basis.</p>
     </section>
     <section class="export-panel"><div><p class="section-kicker">Take it with you</p><h2>Export analysis</h2><p>Download the normalized financial history for further analysis.</p></div><anvil-component type="Button" name="download_button" prop:text="Download CSV" prop:role="secondary-action"></anvil-component></section>
+
+    <anvil-component type="Timer" name="usage_timer" prop:interval="60"></anvil-component>
+
+    <section class="admin-card" aria-label="Admin usage access">
+      <div class="admin-heading"><div><p class="section-kicker">Restricted access</p><h2>Admin usage log</h2><p>Review anonymous analysis activity recorded by the server.</p></div><span class="admin-lock" aria-hidden="true">⌑</span></div>
+      <div class="admin-controls"><anvil-component type="TextBox" name="admin_key_input" prop:type="password" prop:placeholder="Admin key" prop:role="admin-key-input"></anvil-component><anvil-component type="Button" name="admin_button" prop:text="View activity" prop:role="secondary-action"></anvil-component><anvil-component type="Label" name="admin_status" prop:text="Admin key required" prop:role="inline-status"></anvil-component></div>
+      <div anvil:name="admin_results" class="admin-results">
+        <div class="history-grid admin-usage-head"><span>Timestamp</span><span>Ticker</span><span>Visitor IP</span><span>Client</span></div>
+        <anvil-component type="RepeatingPanel" name="admin_panel" prop:item_template="Minimal_Theme_2.AdminUsageRow" prop:role="admin-panel"></anvil-component>
+      </div>
+    </section>
   </anvil-block>
 </anvil-form>
