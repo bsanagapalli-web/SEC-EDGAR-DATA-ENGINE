@@ -1,9 +1,54 @@
 <anvil-form layout="Minimal_Theme_2.Layouts.BaseLayout">
-    <anvil-block slot="actions"></anvil-block>
-    <anvil-block slot="content">
-        <anvil-component type="ColumnPanel" name="column_panel_1" prop:role="card" designer:placeholder="Add components here"></anvil-component>
-    </anvil-block>
-    <anvil-block slot="title">
-        <anvil-component type="Label" name="label_1" prop:role="h1" prop:text="Home"></anvil-component>
-    </anvil-block>
+  <anvil-block slot="title">
+    <anvil-component type="Label" name="app_title" prop:role="dashboard-title" prop:text="SEC EDGAR Fundamental Data Engine"></anvil-component>
+  </anvil-block>
+  <anvil-block slot="content">
+    <section class="command-panel" aria-label="Stock search">
+      <div class="command-copy">
+        <p class="section-kicker">Company lookup</p>
+        <h2>Analyze a public company</h2>
+        <p>Pull normalized fundamentals directly from the latest SEC EDGAR filings.</p>
+      </div>
+      <div class="command-controls">
+        <div class="ticker-control">
+          <span class="control-label">Enter stock ticker</span>
+          <anvil-component type="TextBox" name="ticker_input" prop:text="AAPL" prop:placeholder="e.g. AAPL" prop:role="ticker-input"></anvil-component>
+        </div>
+        <anvil-component type="Button" name="analyze_button" prop:text="Analyze" prop:role="primary-action"></anvil-component>
+        <div class="source-control"><span class="control-label">Data source</span><span class="source-value"><span class="source-dot" aria-hidden="true"></span>SEC EDGAR</span></div>
+        <anvil-component type="CheckBox" name="force_refresh" prop:text="Force refresh" prop:role="refresh-toggle"></anvil-component>
+      </div>
+    </section>
+
+    <section class="company-strip" aria-label="Company overview">
+      <div><p class="section-kicker">Company overview</p><h2><anvil-component type="Label" name="company_name" prop:text="Loading company..." prop:role="inline-heading"></anvil-component> <span class="ticker-badge"><anvil-component type="Label" name="company_ticker" prop:text="AAPL" prop:role="inline-badge"></anvil-component></span></h2></div>
+      <div class="overview-meta"><span class="data-freshness"><span class="freshness-dot" aria-hidden="true"></span><anvil-component type="Label" name="status_label" prop:text="Ready to analyze" prop:role="inline-status"></anvil-component></span><span class="as-of-label">As of <anvil-component type="Label" name="overview_as_of" prop:text="—" prop:role="inline-status"></anvil-component></span></div>
+    </section>
+
+    <section class="metric-grid" aria-label="Key performance indicators">
+      <article class="metric-card metric-card-primary"><div class="metric-topline"><span class="metric-label">Revenue</span><span class="metric-icon">↗</span></div><anvil-component type="Label" name="revenue_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="revenue_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
+      <article class="metric-card"><div class="metric-topline"><span class="metric-label">Net income</span><span class="metric-icon">✦</span></div><anvil-component type="Label" name="net_income_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="net_income_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
+      <article class="metric-card"><div class="metric-topline"><span class="metric-label">Free cash flow</span><span class="metric-icon">⌁</span></div><anvil-component type="Label" name="fcf_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="fcf_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
+      <article class="metric-card"><div class="metric-topline"><span class="metric-label">ROE</span><span class="metric-icon">◎</span></div><anvil-component type="Label" name="roe_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="roe_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
+      <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Operating margin</span><span class="metric-icon">◒</span></div><anvil-component type="Label" name="operating_margin_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Operating efficiency</span></article>
+      <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Net margin</span><span class="metric-icon">◒</span></div><anvil-component type="Label" name="net_margin_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Profit conversion</span></article>
+      <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Debt / equity</span><span class="metric-icon">↔</span></div><anvil-component type="Label" name="debt_equity_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Capital structure</span></article>
+      <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Current ratio</span><span class="metric-icon">◌</span></div><anvil-component type="Label" name="current_ratio_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Short-term coverage</span></article>
+    </section>
+
+    <section class="section-heading chart-section-heading"><div><p class="section-kicker">Trend analysis</p><h2>Performance over time</h2></div><span class="period-chip">SEC annual filings</span></section>
+    <section class="chart-grid" aria-label="Financial charts">
+      <article class="chart-card"><div class="chart-heading"><div><h3>Revenue growth</h3><p>Year-over-year change</p></div><span class="chart-mark chart-mark-blue">%</span></div><div class="plot-frame"><anvil-component type="Plot" name="revenue_growth_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
+      <article class="chart-card chart-card-large"><div class="chart-heading"><div><h3>Profitability</h3><p>Margin progression</p></div></div><div class="plot-frame"><anvil-component type="Plot" name="profitability_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
+      <article class="chart-card"><div class="chart-heading"><div><h3>Free cash flow</h3><p>Cash generation ($B)</p></div><span class="chart-mark chart-mark-green">$</span></div><div class="plot-frame"><anvil-component type="Plot" name="free_cash_flow_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
+      <article class="chart-card chart-card-large"><div class="chart-heading"><div><h3>Leverage</h3><p>Balance-sheet risk indicators</p></div></div><div class="plot-frame"><anvil-component type="Plot" name="leverage_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
+    </section>
+
+    <section class="history-card" aria-label="Financial history">
+      <div class="section-heading history-heading"><div><p class="section-kicker">Filed fundamentals</p><h2>Financial history</h2></div><div class="history-tools"><span class="history-count"><anvil-component type="Label" name="history_count" prop:text="0 fiscal years" prop:role="inline-status"></anvil-component></span><anvil-component type="TextBox" name="history_search" prop:placeholder="Search history" prop:role="table-search"></anvil-component></div></div>
+      <div class="history-table-wrap"><div class="history-grid history-head"><span>Fiscal year</span><span>Revenue</span><span>Net income</span><span>FCF</span><span>Gross margin</span><span>Operating margin</span><span>ROE</span><span>Debt / equity</span></div><anvil-component type="RepeatingPanel" name="history_panel" prop:item_template="Minimal_Theme_2.HistoryRow" prop:role="history-panel"></anvil-component></div>
+      <p class="table-footnote">Values normalized from annual SEC EDGAR filings. Ratios shown on a trailing fiscal-year basis.</p>
+    </section>
+    <section class="export-panel"><div><p class="section-kicker">Take it with you</p><h2>Export analysis</h2><p>Download the normalized financial history for further analysis.</p></div><anvil-component type="Button" name="download_button" prop:text="Download CSV" prop:role="secondary-action"></anvil-component></section>
+  </anvil-block>
 </anvil-form>

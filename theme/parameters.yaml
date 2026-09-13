@@ -1,17 +1,22 @@
 color_scheme:
   colors:
   - {color: '#176b87', name: Primary}
-  - {color: '#f7f8fa', name: Background}
+  - {color: '#f3f6fa', name: Background}
   - {color: '#ffffff', name: Surface}
-  - {color: '#1d2430', name: Text}
+  - {color: '#10243e', name: Text}
   - {color: '#667085', name: Muted}
-  - {color: '#d8dee8', name: Border}
-  - {color: '#0e4254', name: Primary Dark}
+  - {color: '#dbe4ed', name: Border}
+  - {color: '#0d4560', name: Primary Dark}
   - {color: 'rgba(23, 107, 135, 0.18)', name: Focus Ring}
   - {color: '#ffffff', name: Control Background}
   - {color: '#f9fbfc', name: Control Background Hover}
   - {color: '#eef2f6', name: Control Disabled}
-  - {color: '#eef5f7', name: Surface Muted}
+  - {color: '#edf4f8', name: Surface Muted}
+  - {color: '#18a87e', name: Success}
+  - {color: '#3b82c4', name: Chart Blue}
+  - {color: '#8b72d8', name: Chart Purple}
+  - {color: '#d99445', name: Chart Orange}
+  - {color: '#6eb99a', name: Chart Green}
 roles:
 - components: [Button]
   name: secondary-button

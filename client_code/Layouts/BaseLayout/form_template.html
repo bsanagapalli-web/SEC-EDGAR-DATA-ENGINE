@@ -1,11 +1,16 @@
 <div class="page-shell">
-  <header class="page-header">
-    <div>
-      <p anvil:dom-node="subtitle_text" class="subtitle" style="min-height: 18px; min-width: 70px;">My App</p>
-      <anvil-slot name="title" placeholder="Add your title here"></anvil-slot>
+  <header class="app-header">
+    <div class="brand-lockup">
+      <div class="brand-mark" aria-hidden="true">$</div>
+      <div>
+        <p anvil:dom-node="subtitle_text" class="subtitle">SEC EDGAR • Fundamental Analysis</p>
+        <anvil-slot name="title" placeholder="Add your title here"></anvil-slot>
+        <p class="header-description">Fundamental analysis powered by SEC filings</p>
+      </div>
     </div>
-    <div class="page-actions">
-      <anvil-slot name="actions"></anvil-slot>
+    <div class="header-status">
+      <span class="status-pulse" aria-hidden="true"></span>
+      <span>EDGAR connected</span>
     </div>
   </header>
 

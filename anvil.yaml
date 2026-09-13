@@ -1,5 +1,5 @@
 allow_embedding: false
-name: Minimal Theme 2
+name: SEC EDGAR Fundamental Data Engine
 package_name: Minimal_Theme_2
 runtime_options:
   client_version: '3'
