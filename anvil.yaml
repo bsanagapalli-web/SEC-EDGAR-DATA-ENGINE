@@ -1,0 +1,9 @@
+allow_embedding: false
+name: Minimal Theme 2
+package_name: Minimal_Theme_2
+runtime_options:
+  client_version: '3'
+  server_spec: {base: python310-minimal}
+  version: 3
+services: []
+startup: {module: Form1, type: form}

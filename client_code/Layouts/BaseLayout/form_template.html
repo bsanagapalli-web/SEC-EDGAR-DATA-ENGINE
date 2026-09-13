@@ -1,0 +1,15 @@
+<div class="page-shell">
+  <header class="page-header">
+    <div>
+      <p anvil:dom-node="subtitle_text" class="subtitle" style="min-height: 18px; min-width: 70px;">My App</p>
+      <anvil-slot name="title" placeholder="Add your title here"></anvil-slot>
+    </div>
+    <div class="page-actions">
+      <anvil-slot name="actions"></anvil-slot>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <anvil-slot name="content" placeholder="Add content here"></anvil-slot>
+  </main>
+</div>

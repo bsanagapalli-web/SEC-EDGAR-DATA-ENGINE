@@ -1,0 +1,10 @@
+unique_ids:
+  assets:
+    theme.css: 2JPDRQKGDAONGMBZXHUVFNSWPMF6OFGJ
+  forms:
+    Form1: 3HPXS6JYFZHPB7XDENRCP6VYXTESFPJB
+    Layouts.BaseLayout: 7IIEWGTMH7DCYR66IK632XIXUMFPLUFM
+  modules:
+    Layouts: FZW565KF6FKYBMUXPJ7HGT3T57VKEPRY
+  scripts: {}
+  server_modules: {}

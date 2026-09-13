@@ -1,0 +1,27 @@
+color_scheme:
+  colors:
+  - {color: '#176b87', name: Primary}
+  - {color: '#f7f8fa', name: Background}
+  - {color: '#ffffff', name: Surface}
+  - {color: '#1d2430', name: Text}
+  - {color: '#667085', name: Muted}
+  - {color: '#d8dee8', name: Border}
+  - {color: '#0e4254', name: Primary Dark}
+  - {color: 'rgba(23, 107, 135, 0.18)', name: Focus Ring}
+  - {color: '#ffffff', name: Control Background}
+  - {color: '#f9fbfc', name: Control Background Hover}
+  - {color: '#eef2f6', name: Control Disabled}
+  - {color: '#eef5f7', name: Surface Muted}
+roles:
+- components: [Button]
+  name: secondary-button
+- components: [Label]
+  name: eyebrow
+- components: [Label]
+  name: h1
+- components: [Label]
+  name: lede
+- components: [ColumnPanel]
+  display_in_toolbox: true
+  name: card
+  title: Card

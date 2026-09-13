@@ -1,0 +1,275 @@
+:root {
+  --blank-bg: %color:Background%;
+  --blank-surface: %color:Surface%;
+  --blank-text: %color:Text%;
+  --blank-muted: %color:Muted%;
+  --blank-border: %color:Border%;
+  --blank-primary: %color:Primary%;
+  --blank-primary-dark: %color:Primary Dark%;
+  --blank-focus-ring: %color:Focus Ring%;
+  --blank-control-bg: %color:Control Background%;
+  --blank-control-bg-hover: %color:Control Background Hover%;
+  --blank-control-disabled: %color:Control Disabled%;
+  --blank-surface-muted: %color:Surface Muted%;
+  --anvil-banner-height: %anvil-banner-height%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: calc(100vh - var(--anvil-banner-height, 0px));
+  margin: 0;
+  background: var(--blank-bg);
+  color: var(--blank-text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.page-shell {
+  min-height: 100vh;
+  min-height: calc(100vh - var(--anvil-banner-height, 0px));
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px clamp(20px, 4vw, 56px);
+  border-bottom: 1px solid var(--blank-border);
+  background: var(--blank-surface);
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.page-main {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0 64px;
+}
+
+.empty-section {
+  min-height: 320px;
+  border: 1px dashed var(--blank-border);
+  border-radius: 8px;
+  background: var(--blank-surface);
+}
+
+a {
+  color: var(--blank-primary);
+}
+
+a:hover,
+a:focus {
+  color: var(--blank-primary-dark);
+}
+
+.page-header a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+  color: var(--blank-muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-header a:hover,
+.page-header a:focus,
+.page-header a.is-active {
+  background: var(--blank-surface-muted);
+  color: var(--blank-primary-dark);
+}
+
+.anvil-role-h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: bold;
+}
+
+.subtitle,
+.anvil-role-eyebrow {
+  margin: 0 0 4px;
+  color: var(--blank-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.anvil-role-lede {
+  max-width: 720px;
+  color: var(--blank-muted);
+  font-size: 18px;
+}
+
+.anvil-button > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--blank-primary);
+  color: white;
+}
+
+.anvil-button > button:hover,
+.anvil-button > button:focus {
+  background: var(--blank-primary-dark);
+  color: white;
+}
+
+.anvil-role-secondary-button > button {
+  border-color: var(--blank-border);
+  background: var(--blank-surface);
+  color: var(--blank-primary-dark);
+}
+
+.anvil-role-card {
+  padding: 24px;
+  border: 1px solid var(--blank-border);
+  border-radius: 8px;
+  background: var(--blank-surface);
+}
+
+input.anvil-text-box,
+textarea.anvil-text-area,
+.anvil-dropdown select,
+.anvil-datepicker input {
+  min-height: 42px;
+  box-sizing: border-box;
+  border: 1px solid var(--blank-border);
+  border-radius: 6px;
+  background-color: var(--blank-control-bg);
+  color: var(--blank-text);
+  box-shadow: none;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.daterangepicker {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: var(--blank-primary);
+}
+
+textarea.anvil-text-area {
+  min-height: 120px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.anvil-datepicker,
+.anvil-dropdown {
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.anvil-dropdown {
+  padding: 3px;
+}
+
+.anvil-dropdown select {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.anvil-datepicker input {
+  width: calc(100% - 6px);
+  margin: 3px;
+}
+
+input.anvil-text-box:hover,
+textarea.anvil-text-area:hover,
+.anvil-dropdown select:hover,
+.anvil-datepicker input:hover {
+  background-color: var(--blank-control-bg-hover);
+}
+
+input.anvil-text-box:focus,
+textarea.anvil-text-area:focus,
+.anvil-dropdown:focus-within select,
+.anvil-dropdown select:focus,
+.anvil-datepicker input:focus {
+  border-color: var(--blank-primary);
+  box-shadow: 0 0 0 3px var(--blank-focus-ring);
+  outline: none;
+}
+
+input.anvil-text-box:disabled,
+textarea.anvil-text-area:disabled,
+.anvil-dropdown select:disabled,
+.anvil-datepicker input:disabled {
+  background-color: var(--blank-control-disabled);
+  color: var(--blank-muted);
+  cursor: not-allowed;
+}
+
+.anvil-dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 64px 0 12px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%231d2430' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+}
+
+.anvil-checkbox,
+.anvil-radio {
+  color: var(--blank-text);
+}
+
+.anvil-checkbox label,
+.anvil-radio label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blank-text);
+  cursor: pointer;
+}
+
+.anvil-checkbox input,
+.anvil-radio input {
+  accent-color: var(--blank-primary);
+  cursor: pointer;
+}
+
+.anvil-checkbox input:focus-visible,
+.anvil-radio input:focus-visible {
+  outline: 3px solid var(--blank-focus-ring);
+  outline-offset: 2px;
+}
+
+.anvil-checkbox input:disabled,
+.anvil-radio input:disabled {
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .page-header {
+    display: block;
+  }
+
+  .page-actions {
+    justify-content: flex-start;
+    margin-top: 18px;
+  }
+
+  .anvil-role-h1 {
+    font-size: 28px;
+  }
+}
