@@ -3,7 +3,7 @@
     <anvil-component type="Label" name="app_title" prop:role="dashboard-title" prop:text="SEC EDGAR Fundamental Data Engine"></anvil-component>
   </anvil-block>
   <anvil-block slot="content">
-    <section class="command-panel" aria-label="Stock search">
+    <section aria-label="Stock search" class="command-panel">
       <div class="command-copy">
         <p class="section-kicker">Company lookup</p>
         <h2>Analyze a public company</h2>
@@ -15,17 +15,15 @@
           <anvil-component type="TextBox" name="ticker_input" prop:text="AAPL" prop:placeholder="e.g. AAPL" prop:role="ticker-input"></anvil-component>
         </div>
         <anvil-component type="Button" name="analyze_button" prop:text="Analyze" prop:role="primary-action"></anvil-component>
-        <div class="source-control"><span class="control-label">Data source</span><span class="source-value"><span class="source-dot" aria-hidden="true"></span>SEC EDGAR</span></div>
+        <div class="source-control"><span class="control-label">Data source</span><span class="source-value"><span aria-hidden="true" class="source-dot"></span>SEC EDGAR</span></div>
         <anvil-component type="CheckBox" name="force_refresh" prop:text="Force refresh" prop:role="refresh-toggle"></anvil-component>
       </div>
     </section>
-
-    <section class="company-strip" aria-label="Company overview">
+    <section aria-label="Company overview" class="company-strip">
       <div><p class="section-kicker">Company overview</p><h2><anvil-component type="Label" name="company_name" prop:text="Loading company..." prop:role="inline-heading"></anvil-component> <span class="ticker-badge"><anvil-component type="Label" name="company_ticker" prop:text="AAPL" prop:role="inline-badge"></anvil-component></span></h2></div>
-      <div class="overview-meta"><span class="public-counter"><span class="counter-dot" aria-hidden="true"></span><anvil-component type="Label" name="visitor_count" prop:text="0" prop:role="public-count"></anvil-component> all-time users</span><span class="public-counter current-counter"><span class="counter-dot" aria-hidden="true"></span><anvil-component type="Label" name="current_user_count" prop:text="0" prop:role="public-count"></anvil-component> current users</span><span class="data-freshness"><span class="freshness-dot" aria-hidden="true"></span><anvil-component type="Label" name="status_label" prop:text="Ready to analyze" prop:role="inline-status"></anvil-component></span><span class="as-of-label">As of <anvil-component type="Label" name="overview_as_of" prop:text="—" prop:role="inline-status"></anvil-component></span></div>
+      <div class="overview-meta"><span class="public-counter"><span aria-hidden="true" class="counter-dot"></span><anvil-component type="Label" name="visitor_count" prop:text="0" prop:role="public-count"></anvil-component> all-time users</span><span class="public-counter current-counter"><span aria-hidden="true" class="counter-dot"></span><anvil-component type="Label" name="current_user_count" prop:text="0" prop:role="public-count"></anvil-component> current users</span><span class="data-freshness"><span aria-hidden="true" class="freshness-dot"></span><anvil-component type="Label" name="status_label" prop:text="Ready to analyze" prop:role="inline-status"></anvil-component></span><span class="as-of-label">As of <anvil-component type="Label" name="overview_as_of" prop:text="—" prop:role="inline-status"></anvil-component></span></div>
     </section>
-
-    <section class="metric-grid" aria-label="Key performance indicators">
+    <section aria-label="Key performance indicators" class="metric-grid">
       <article class="metric-card metric-card-primary"><div class="metric-topline"><span class="metric-label">Revenue</span><span class="metric-icon">↗</span></div><anvil-component type="Label" name="revenue_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="revenue_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
       <article class="metric-card"><div class="metric-topline"><span class="metric-label">Net income</span><span class="metric-icon">✦</span></div><anvil-component type="Label" name="net_income_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="net_income_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
       <article class="metric-card"><div class="metric-topline"><span class="metric-label">Free cash flow</span><span class="metric-icon">⌁</span></div><anvil-component type="Label" name="fcf_value" prop:text="—" prop:role="metric-value"></anvil-component><anvil-component type="Label" name="fcf_delta" prop:text="—" prop:role="metric-delta"></anvil-component></article>
@@ -35,28 +33,24 @@
       <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Debt / equity</span><span class="metric-icon">↔</span></div><anvil-component type="Label" name="debt_equity_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Capital structure</span></article>
       <article class="metric-card metric-card-secondary"><div class="metric-topline"><span class="metric-label">Current ratio</span><span class="metric-icon">◌</span></div><anvil-component type="Label" name="current_ratio_value" prop:text="—" prop:role="metric-value"></anvil-component><span class="metric-caption">Short-term coverage</span></article>
     </section>
-
     <section class="section-heading chart-section-heading"><div><p class="section-kicker">Trend analysis</p><h2>Performance over time</h2></div><span class="period-chip">SEC annual filings</span></section>
-    <section class="chart-grid" aria-label="Financial charts">
+    <section aria-label="Financial charts" class="chart-grid">
       <article class="chart-card"><div class="chart-heading"><div><h3>Revenue growth</h3><p>Year-over-year change</p></div><span class="chart-mark chart-mark-blue">%</span></div><div class="plot-frame"><anvil-component type="Plot" name="revenue_growth_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
       <article class="chart-card chart-card-large"><div class="chart-heading"><div><h3>Profitability</h3><p>Margin progression</p></div></div><div class="plot-frame"><anvil-component type="Plot" name="profitability_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
       <article class="chart-card"><div class="chart-heading"><div><h3>Free cash flow</h3><p>Cash generation ($B)</p></div><span class="chart-mark chart-mark-green">$</span></div><div class="plot-frame"><anvil-component type="Plot" name="free_cash_flow_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
       <article class="chart-card chart-card-large"><div class="chart-heading"><div><h3>Leverage</h3><p>Balance-sheet risk indicators</p></div></div><div class="plot-frame"><anvil-component type="Plot" name="leverage_plot" prop:height="220px" prop:interactive="true"></anvil-component></div></article>
     </section>
-
-    <section class="history-card" aria-label="Financial history">
+    <section aria-label="Financial history" class="history-card">
       <div class="section-heading history-heading"><div><p class="section-kicker">Filed fundamentals</p><h2>Financial history</h2></div><div class="history-tools"><span class="history-count"><anvil-component type="Label" name="history_count" prop:text="0 fiscal years" prop:role="inline-status"></anvil-component></span><anvil-component type="TextBox" name="history_search" prop:placeholder="Search history" prop:role="table-search"></anvil-component></div></div>
       <div class="history-table-wrap"><div class="history-grid history-head"><span>Fiscal year</span><span>Revenue</span><span>Net income</span><span>FCF</span><span>Gross margin</span><span>Operating margin</span><span>ROE</span><span>Debt / equity</span></div><anvil-component type="RepeatingPanel" name="history_panel" prop:item_template="Minimal_Theme_2.HistoryRow" prop:role="history-panel"></anvil-component></div>
       <p class="table-footnote">Values normalized from annual SEC EDGAR filings. Ratios shown on a trailing fiscal-year basis.</p>
     </section>
     <section class="export-panel"><div><p class="section-kicker">Take it with you</p><h2>Export analysis</h2><p>Download the normalized financial history for further analysis.</p></div><anvil-component type="Button" name="download_button" prop:text="Download CSV" prop:role="secondary-action"></anvil-component></section>
-
     <anvil-component type="Timer" name="usage_timer" prop:interval="60"></anvil-component>
-
-    <section class="admin-card" aria-label="Admin usage access">
-      <div class="admin-heading"><div><p class="section-kicker">Restricted access</p><h2>Admin usage log</h2><p>Review anonymous analysis activity recorded by the server.</p></div><span class="admin-lock" aria-hidden="true">⌑</span></div>
+    <section aria-label="Admin usage access" class="admin-card">
+      <div class="admin-heading"><div><p class="section-kicker">Restricted access</p><h2>Admin usage log</h2><p>Review anonymous analysis activity recorded by the server.</p></div><span aria-hidden="true" class="admin-lock">⌑</span></div>
       <div class="admin-controls"><anvil-component type="TextBox" name="admin_key_input" prop:type="password" prop:placeholder="Admin key" prop:role="admin-key-input"></anvil-component><anvil-component type="Button" name="admin_button" prop:text="View activity" prop:role="secondary-action"></anvil-component><anvil-component type="Label" name="admin_status" prop:text="Admin key required" prop:role="inline-status"></anvil-component></div>
-      <div anvil:name="admin_results" class="admin-results">
+      <div class="admin-results" anvil:name="admin_results">
         <div class="history-grid admin-usage-head"><span>Timestamp</span><span>Ticker</span><span>Visitor IP</span><span>Client</span></div>
         <anvil-component type="RepeatingPanel" name="admin_panel" prop:item_template="Minimal_Theme_2.AdminUsageRow" prop:role="admin-panel"></anvil-component>
       </div>
